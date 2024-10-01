@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AADL 3 - Registration Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="top-rectangular">
+        <h1>تسجيل في صيغة عدل 3</h1>
+    </div>
+
+    <div class="container">
+        <form id="aadlForm">
+            <div class="form-group">
+                <label for="province">الولاية</label>
+                <select id="province" required>
+                    <!-- Options will be dynamically loaded here -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="nin">الرقم الوطني التعريفي</label>
+                <input type="text" id="nin" required>
+            </div>
+            <div class="form-group">
+                <label for="nss">رقم الضمان الاجتماعي</label>
+                <input type="text" id="nss" required>
+            </div>
+            <div class="form-group">
+                <label for="phone">رقم الهاتف</label>
+                <input type="tel" id="phone" required>
+            </div>
+            <div class="form-group">
+                <label for="email">البريد الإلكتروني</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">كلمة المرور</label>
+                <input type="password" id="password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">تأكيد كلمة المرور</label>
+                <input type="password" id="confirmPassword" required>
+            </div>
+
+            <button type="submit" class="submit-btn">تسجيل</button>
+        </form>
+    </div>
+
+    <div class="success-container" id="successMessage" style="display: none;">
+        <div class="success-icon">✔</div>
+        <p>لقد تم تسجيلك بنجاح في صيغة عدل 3</p>
+        <button id="locationButton" class="submit-btn">اختيار الموقع الجغرافي للسكن</button>
+    </div>
+
+    <div class="bottom-rectangular">
+        <p>حقوق النشر 2024 ©</p>
+    </div>
+
+    <script>
+        // Fetch provinces from provinces.html
+        fetch('provinces.html')
+            .then(response => response.text())
+            .then(data => {
+                // Create a temporary element to parse the HTML
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = data;
+
+                // Find the select element containing the provinces
+                const provinceSelect = tempDiv.querySelector('select');
+                const provinceOptions = provinceSelect ? provinceSelect.innerHTML : '';
+
+                // Populate the province dropdown in the main form
+                document.getElementById('province').innerHTML = provinceOptions;
+            })
+            .catch(error => console.error('Error loading provinces:', error));
+    </script>
+
+    <script src="script.js"></script>
+</body>
+</html>
